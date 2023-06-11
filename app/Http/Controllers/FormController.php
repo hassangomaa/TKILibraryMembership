@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\FormSubmissionMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FormSubmission;
@@ -35,11 +36,12 @@ class FormController extends Controller
             $form = $this->formDataRepository->create($validatedData);
 
             // Send email with form data
-            // $recipientEmail = 'alex.podariu@kpiinstitute.com'; // Change to your desired email address
-            // Mail::to($recipientEmail)->send(new FormSubmission($form));
+            $recipientEmail = 'hassan.gomaa.dev@gmail.com'; // Change to your desired email address
+             Mail::to($recipientEmail)->send(new FormSubmissionMail($form));
 
             // Set success message in session
             $request->session()->flash('success', 'Form submitted successfully.');
+
 
             return redirect()->route("file.download-brochure");
         } catch (Exception $e) {
