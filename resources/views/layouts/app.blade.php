@@ -10,7 +10,18 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Almarai:wght@700;800&family=Amatic+SC:wght@400;700&family=El+Messiri:wght@400;500;600;700&family=Finlandica:ital,wght@0,400;0,600;0,700;1,500&family=Kufam:ital,wght@0,500;0,700;1,400;1,500;1,600;1,700;1,800&family=Nanum+Myeongjo:wght@400;700;800&family=Tajawal:wght@400;500;700;800&display=swap"
         rel="stylesheet">
+
+        <!-- Other head elements -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.min.js"></script>
+        <!-- Other scripts -->
+
+
     <title>{{ env('APP_NAME', 'Default Title') }}</title>
+
+
+
 </head>
 
 <body>
