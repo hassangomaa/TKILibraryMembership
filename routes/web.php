@@ -19,7 +19,7 @@ Route::view('/', 'welcome');
 
 Route::get('/download', [FileController::class, 'download'])->name('file.download');
 
-Route::get('/', [FormController::class, 'showForm'])->name('form');
-Route::post('/submit', [FormController::class, 'submitForm'])->name('submit-form');
-Route::get('/get-phone-code', [FormController::class, 'getPhoneCode'])->name('get-phone-code');
-Route::get('/download-brochure', [FileController::class, 'downloadBrochure'])->name('download-brochure');
+Route::get('/form', [FormController::class, 'showForm'])->name('form');
+Route::post('/submit', [FormController::class, 'submitForm'])->name('form.submit');
+Route::get('/get-phone-code', [FormController::class, 'getPhoneCode'])->name('form.get-phone-code');
+Route::get('/download-brochure', [FileController::class, 'downloadBrochure'])->name('file.download-brochure');

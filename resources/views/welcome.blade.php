@@ -1,34 +1,6 @@
 @extends("layouts.app")
 
 @section("content")
-    <!-- ================================ top header ============================== -->
-    <div class="top-header">
-        <p>
-            THE KPI INSTITUTE
-        </p>
-    </div>
-
-    <div class="main-content-Navigation-container">
-        <div class="main-content-Navigation">
-            <div class="main-content-Navigation-img">
-                <img src="./downloads/Icon1_19.png" alt="">
-                <p>
-                    TKI RESEARCH LIBRARY
-                </p>
-            </div>
-
-            <div class="main-content-Navigation-auth">
-                <p>
-                    <a href="">Login</a>
-                </p>
-                <p>
-                    <a href="">Register</a>
-                </p>
-            </div>
-
-        </div>
-    </div>
-
 
     <!-- ================================ main content ============================== -->
     <div class="container">
@@ -115,37 +87,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="main-content-download-containrt-right">
 
+                <div class="main-content-download-containrt-right">
                     <div class="main-content-download-containrt-right-form">
-                        <h2>
-                            Download the free sample
-                        </h2>
-                        <p>
-                            To proceed with your order, please take
-                            a moment to fill in the fields below: </p>
-                        <form action="">
-                            <input type="text" placeholder="First Name">
-                            <input type="text" placeholder="Last Name">
-                            <input type="text" placeholder="Company">
-                            <input type="text" placeholder="Cantry">
+                        <h2>Download the free sample</h2>
+                        <p>To proceed with your order, please take a moment to fill in the fields below:</p>
+                        <form action="{{route('form.submit')}}" method="POST">
+                            @csrf
+                            <input type="text" name="first_name" placeholder="First Name">
+                            <input type="text" name="last_name" placeholder="Last Name">
+                            <input type="text" name="company" placeholder="Company">
+                            <input type="text" name="country" placeholder="Country">
                             <div>
-                                <input type="text" placeholder="Prefix">
-                                <input type="text" placeholder="Phone Number">
+                                <input type="text" name="prefix" placeholder="Prefix">
+                                <input type="text" name="phone_number" placeholder="Phone Number">
                             </div>
-                            <input type="text" placeholder="Email Address">
+                            <input type="text" name="email" placeholder="Email Address">
+                            <div class="main-content-download-containrt-right-form-footer">
+                                <p>We value your privacy and will never disclose your data to third parties without your consent.</p>
+                                <button type="submit">Download</button>
+                            </div>
                         </form>
-                        <div class="main-content-download-containrt-right-form-footer">
-                            <p>
-                                We value your privacy and will never disclose your
-                                data to third parties without your consent.
-                            </p>
-                            <button>
-                                Download
-                            </button>
-                        </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
