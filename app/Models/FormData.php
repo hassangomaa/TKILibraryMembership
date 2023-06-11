@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\FormSubmissionObserver;
 
 class FormData extends Model
 {
@@ -19,10 +20,12 @@ class FormData extends Model
         'email',
     ];
 
-//    protected $casts = [
-//        'id' => 'integer',
-//    ];
+    protected static function boot()
+    {
+        parent::boot();
 
+        self::observe(FormSubmissionObserver::class);
+    }
 
 
 }

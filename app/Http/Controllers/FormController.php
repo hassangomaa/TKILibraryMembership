@@ -35,13 +35,8 @@ class FormController extends Controller
 
             $form = $this->formDataRepository->create($validatedData);
 
-            // Send email with form data
-            $recipientEmail = 'hassan.gomaa.dev@gmail.com'; // Change to your desired email address
-             Mail::to($recipientEmail)->send(new FormSubmissionMail($form));
-
             // Set success message in session
             $request->session()->flash('success', 'Form submitted successfully.');
-
 
             return redirect()->route("file.download-brochure");
         } catch (Exception $e) {
