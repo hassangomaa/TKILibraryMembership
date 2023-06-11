@@ -3,45 +3,57 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\FormData;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FormSubmission;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberType;
+use Exception;
+use App\Http\Requests\SubmitFormRequest;
+use App\Http\Requests\GetPhoneCodeRequest;
+use App\Repositories\FormDataRepository;
 
 class FormController extends Controller
 {
+    protected $formDataRepository;
+
+    public function __construct(FormDataRepository $formDataRepository)
+    {
+        $this->formDataRepository = $formDataRepository;
+    }
+
     public function showForm()
     {
         return view('welcome');
     }
 
-    public function submitForm(Request $request)
+    public function submitForm(SubmitFormRequest $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-        ]);
+        try {
+            $validatedData = $request->validated();
 
-        $form = new FormData();
-        $form->name = $validatedData['name'];
-        $form->email = $validatedData['email'];
-        $form->phone = $validatedData['phone'];
-        $form->save();
+            $form = $this->formDataRepository->create($validatedData);
 
-        // Send email with form data
-        $recipientEmail = 'alex.podariu@kpiinstitute.com'; // Change to your desired email address
-        Mail::to($recipientEmail)->send(new FormSubmission($form));
+            // Send email with form data
+            // $recipientEmail = 'alex.podariu@kpiinstitute.com'; // Change to your desired email address
+            // Mail::to($recipientEmail)->send(new FormSubmission($form));
 
-        return redirect()->route('file.download');
+            // Set success message in session
+            $request->session()->flash('success', 'Form submitted successfully.');
+
+            return redirect()->route("file.download-brochure");
+        } catch (Exception $e) {
+            // Set error message in session
+            $request->session()->flash('error', 'An error occurred during form submission.');
+
+            return redirect()->back();
+        }
     }
 
 
-    public function getPhoneCode(Request $request)
+    public function getPhoneCode(GetPhoneCodeRequest $request)
     {
-        $countryCode = $request->get('country_code');
+        $countryCode = $request->input('country_code');
 
         $phoneUtil = PhoneNumberUtil::getInstance();
         $phoneNumber = $phoneUtil->getExampleNumberForType($countryCode, PhoneNumberType::MOBILE);
@@ -53,6 +65,4 @@ class FormController extends Controller
             'phone_number' => $phoneNumber
         ]);
     }
-
-
 }

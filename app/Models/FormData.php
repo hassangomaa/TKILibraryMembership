@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class FormData extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'company',
+        'country',
+        'prefix',
+        'phone_number',
+        'email',
+    ];
+
+//    protected $casts = [
+//        'id' => 'integer',
+//    ];
+
+
+
 }

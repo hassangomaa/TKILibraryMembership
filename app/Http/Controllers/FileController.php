@@ -8,7 +8,8 @@ class FileController extends Controller
 {
     public function downloadBrochure()
     {
-        $pathToFile = public_path('downloads/TKI_Membership_Brochure.pdf');
-        return response()->download($pathToFile);
+        $pathToFile = public_path('downloads/TKI-Membership-Brochure.pdf');
+        return response()->file($pathToFile);
     }
+
 }
