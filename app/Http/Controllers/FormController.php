@@ -45,9 +45,14 @@ class FormController extends Controller
 
         $phoneUtil = PhoneNumberUtil::getInstance();
         $phoneNumber = $phoneUtil->getExampleNumberForType($countryCode, PhoneNumberType::MOBILE);
-        $phoneCode = $phoneNumber ? $phoneUtil->format($phoneNumber, PhoneNumberFormat::NATIONAL) : '';
+        $phonePrefix = $phoneNumber ? $phoneUtil->getCountryCodeForRegion($countryCode) : '';
+        $phoneNumber = $phoneNumber ? $phoneUtil->getNationalSignificantNumber($phoneNumber) : '';
 
-        return response()->json(['phone_code' => $phoneCode]);
+        return response()->json([
+            'phone_prefix' => $phonePrefix,
+            'phone_number' => $phoneNumber
+        ]);
     }
+
 
 }

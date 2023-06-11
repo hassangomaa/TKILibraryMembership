@@ -172,7 +172,8 @@
                     type: "GET",
                     data: { country_code: countryCode },
                     success: function(response) {
-                        $('input[name="prefix"]').attr('placeholder', response.phone_code);
+                        $('input[name="prefix"]').attr('placeholder', response.phone_prefix);
+                        $('input[name="phone_number"]').attr('placeholder', response.phone_number);
                     },
                     error: function(xhr) {
                         console.log(xhr.responseText);
@@ -181,4 +182,5 @@
             });
         });
     </script>
+
 @endsection
