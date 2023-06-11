@@ -22,9 +22,11 @@ class FormSubmissionMail extends Mailable
     public function build()
     {
         return $this->subject('New Form Submission')
+            ->view('emails.form-submission-html')
             ->text('emails.form-submission-plain')
             ->with(['formData' => $this->formData]);
     }
+
 
 
 
